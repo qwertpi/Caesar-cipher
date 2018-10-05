@@ -1,4 +1,5 @@
 import re
+from random import randint
 regex = re.compile('[^a-zA-Z]')
 
 def encrypt(string,shift):
@@ -24,8 +25,13 @@ if mode=="2" or mode=="decrypt":
     while True:
         for el in plaintexts:
             if crib in el:
+                print(abs(ord(el[1])-ord(text[1])))
                 input(el)
 elif mode=="1" or mode=="encrypt":
     text=regex.sub('',input("Enter the text you wish to encrypt    ").lower())
-    shift=int(input("Enter the shift you wish to use    "))
+    try:
+        shift=int(input("Enter the shift you wish to use or leave blank to use a random shift    "))
+    except ValueError:
+        shift=randint(1,26)
     print(encrypt(text,shift))
+    print(shift)
