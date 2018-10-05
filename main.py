@@ -16,11 +16,16 @@ def decrypt(string):
         plaintexts.append(plaintext)
         plaintext=""
     return plaintexts
- 
-text=regex.sub('',input("    ").lower())
-crib=input("    ").lower()
-plaintexts=decrypt(text)
-while True:
-    for el in plaintexts:
-        if crib in el:
-            input(el)
+mode=input("Would you like to 1) Encrypt or 2) Decrypt    ").lower()
+if mode=="2" or mode=="decrypt":
+    text=regex.sub('',input("Enter the text you wish to decrypt    ").lower())
+    crib=input("Enter a crib to search for in the posible decryptions    ").lower()
+    plaintexts=decrypt(text)
+    while True:
+        for el in plaintexts:
+            if crib in el:
+                input(el)
+elif mode=="1" or mode=="encrypt":
+    text=regex.sub('',input("Enter the text you wish to encrypt    ").lower())
+    shift=int(input("Enter the shift you wish to use    "))
+    print(encrypt(text,shift))
