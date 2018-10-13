@@ -20,6 +20,12 @@ def decrypt(string):
 mode=input("Would you like to 1) Encrypt or 2) Decrypt    ").lower()
 if mode=="2" or mode=="decrypt":
     text=regex.sub('',input("Enter the text you wish to decrypt    ").lower())
+    if text=="":
+        try:
+            with open("file.txt","r") as f:
+                text=regex.sub('',f.read()).lower()
+        except FileNotFoundError:
+            pass
     crib=input("Enter a crib to search for in the posible decryptions    ").lower()
     plaintexts=decrypt(text)
     while True:
