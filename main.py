@@ -6,6 +6,10 @@ def encrypt(string,shift):
     ciphertext=""
     for char in string.lower():
         ciphertext+=chr(((ord(char)-96+shift)%26+96))
+        #26=z but 26%26=0 which results in the ` character this fixes this
+        if ciphertext[-1]=="`":
+            ciphertext=ciphertext[:-1]
+            ciphertext+="z"
     return ciphertext
 
 def decrypt(string):
@@ -14,6 +18,10 @@ def decrypt(string):
     for shift in range (1,27):
         for char in string.lower():
             plaintext+=chr(((ord(char)-96+shift)%26+96))
+            #26=z but 26%26=0 which results in the ` character this fixes this
+            if plaintext[-1]=="`":
+                plaintext=plaintext[:-1]
+                plaintext+="z"
         plaintexts.append(plaintext)
         plaintext=""
     return plaintexts
