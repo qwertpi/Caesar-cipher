@@ -1,10 +1,10 @@
 # Caesar-cipher
-Some basic python for encrypting and decrypting with a caesar cipher
+Some basic python for encrypting and decrypting with a caesar cipher  
 Feedback and pull requests are very welcome
 
 
 ## Copyright (I know this looks boring but it is important and legaly binding)
-Copyright © 2018  Rory Sharp All rights reserved.
+Copyright © 2018-9  Rory Sharp All rights reserved.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
