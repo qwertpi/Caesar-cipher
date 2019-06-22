@@ -1,5 +1,5 @@
 # Caesar-cipher
-Some basic python for encrypting and decrypting with a caesar cipher  
+Some python for encrypting and decrypting with a caesar cipher  
 Feedback and pull requests are very welcome
 
 
