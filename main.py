@@ -1,12 +1,8 @@
-#need regex for input sanititastion
+#need regex to check for special characters
 import re
 #need random numbers to perform random shifts
 from random import randint
 
-#regex that matches characters that are not lower case a-z and not upper case A-Z
-regex = re.compile('[^a-zA-Z]')
-
-#takes a list and returns a list sorted by the number of times the elements occured in the original list
 def SortList(l):
     '''
     Removes duplicates and sorts a list by how many duplicates there were
