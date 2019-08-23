@@ -9,7 +9,7 @@ def SortList(l):
     :param l: list, the list to be sorted
     :return: a list in decending order of the number of duplicates
     '''
-    #creates a dictionary with the keys of the list elements and values of how often the key appears in the list
+    #creates a dictionary with keys of the list elements and values of how often the key appears in the list
     l = {x: l.count(x) for x in set(l)}
     #sorts the dict by the keys and pulls out the keys
     l = [x for x in sorted(l, key=l.get, reverse=True)]
@@ -87,9 +87,9 @@ def decrypt(string, shift):
 
     return plaintext
 
-mode = input("Would you like to 1) Encrypt or 2) Decrypt    ").lower()
+MODE = input("Would you like to 1) Encrypt or 2) Decrypt    ").lower()
 
-if mode == "1" or mode == "encrypt":
+if MODE == "1" or MODE == "encrypt":
     text = input("Enter the text you wish to encrypt    ").lower()
 
     try:
@@ -102,7 +102,7 @@ if mode == "1" or mode == "encrypt":
     print(encrypt(text, shift))
     print(shift)
     
-elif mode == "2" or mode == "decrypt":
+elif MODE == "2" or MODE == "decrypt":
     text = input("Enter the text you wish to decrypt    ").lower()
 
     #opens the file if no text input was provided
@@ -120,28 +120,33 @@ elif mode == "2" or mode == "decrypt":
 
     #if they left the shift blank the cast to int will fail raising this error
     except ValueError:
-        crib = input("Enter a crib to search for in the posible decryptions if you know it else leave this blank    ").lower()
+        CRIB = input("Enter a crib to search for in the posible decryptions if you know it else leave this blank    ").lower()
 
         plaintexts = [decrypt(text, shift) for shift in range(1, 26)]
         #if they typed a crib
-        if crib != "":
+        if CRIB != "":
             #shows each of the plaintexts along with their shift
             while True:
                 for el in plaintexts:
-                    if crib in el:
-                        print(abs(ord(el[1])-ord(text[1])))
+                    if CRIB in el:
+                        print(abs(ord(el[1]) - ord(text[1])))
                         input(el)
         else:
             #without a crib we fall back to bigrams and trigrams
             for el in plaintexts:
                 #gets the bigrams and trigrams in the text in lists of decending order of frequency
-                bigrams = SortList(NgramFinder(el))
-                trigrams = SortList(NgramFinder(el, 3))
+                BIGRAMS = SortList(NgramFinder(el))
+                TRIGRAMS = SortList(NgramFinder(el, 3))
                 #checks if any of the top three bigrams for enlish text are in the top two bigrams for this plaintext 
                 #then does the same for trigrams
-                if bigrams[0] == "th" or bigrams[1] == "th" or bigrams[0] == "he" or bigrams[1] == "he" or bigrams[0] == "in" or bigrams[1] == "in" or trigrams[0] == "the" or trigrams[1] == "the" or trigrams[0] == "and" or trigrams[1] == "and" or trigrams[0] == "ing" or trigrams[1] == "ing":            
-                    print(abs(ord(el[0]) - ord(text[0])))
-                    input(el)
+                if (BIGRAMS[0] == "th" or BIGRAMS[0] == "th" or
+                    BIGRAMS[0] == "he" or BIGRAMS[0] == "he" or
+                    BIGRAMS[0] == "in" or BIGRAMS[0] == "in" or
+                    TRIGRAMS[0] == "the" or TRIGRAMS[1] == "the" or
+                    TRIGRAMS[0] == "and" or TRIGRAMS[1] == "and" or
+                    TRIGRAMS[0] == "ing" or TRIGRAMS[1] == "ing"):            
+                       print(abs(ord(el[0]) - ord(text[0])))
+                       input(el)
                     
 else:
     print("That mode doesn't exist, please restart the program")
