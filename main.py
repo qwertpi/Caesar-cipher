@@ -2,7 +2,7 @@
 import re
 #need random numbers to perform random shifts
 from random import randint
-
+from string import ascii_lowercase as lowercase
 def SortList(l):
     '''
     Removes duplicates and sorts a list by how many duplicates there were
@@ -30,7 +30,14 @@ def NgramFinder(text, n=2):
             #bigram needs current character and one character ahead, trigram needs up to second character etc.
             for step in range(1, n):
                 ngram += text[i+step]
-            grams.append(ngram)
+            
+            clean = True
+            for char in ngram:
+                if char not in lowercase:
+                    clean = False
+                    break
+            if clean:
+                grams.append(ngram)
             i += 1
     #once we get to the end of the string an index error will be caused
     except IndexError:
@@ -134,7 +141,7 @@ elif MODE == "2" or MODE == "decrypt":
             while True:
                 for el in plaintexts:
                     if CRIB in el:
-                        print(abs(ord(el[1]) - ord(text[1])))
+                        print((ord(text[0]) - 96 - (ord(el[0]) - 96)) % 26)
                         input(el)
         else:
             #without a crib we fall back to bigrams and trigrams
@@ -150,8 +157,8 @@ elif MODE == "2" or MODE == "decrypt":
                     TRIGRAMS[0] == "the" or TRIGRAMS[1] == "the" or
                     TRIGRAMS[0] == "and" or TRIGRAMS[1] == "and" or
                     TRIGRAMS[0] == "ing" or TRIGRAMS[1] == "ing"):            
-                       print(abs(ord(el[0]) - ord(text[0])))
+                       print((ord(text[0]) - 96 - (ord(el[0]) - 96)) % 26)
                        input(el)
                     
 else:
-    print("That mode doesn't exist, please restart the program")
+    print("That mode doesn't exist, please restart the program") 
