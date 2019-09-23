@@ -91,7 +91,12 @@ MODE = input("Would you like to 1) Encrypt or 2) Decrypt    ").lower()
 
 if MODE == "1" or MODE == "encrypt":
     text = input("Enter the text you wish to encrypt    ").lower()
-
+    if text == "":
+        try:
+            with open("file.txt", "r") as f:
+                text = f.read().lower()
+        except FileNotFoundError:
+            print("No text was provided and the file file.txt doesn't exist, non-existant text can't be encrypted!")
     try:
         shift = int(input("Enter the shift you wish to use or leave blank to use a random shift    "))
         
@@ -111,7 +116,7 @@ elif MODE == "2" or MODE == "decrypt":
             with open("file.txt", "r") as f:
                 text = f.read().lower()
         except FileNotFoundError:
-            print("No text was provided and the file file.txt doesn't exist, non-existant text can't be encrypted!")
+            print("No text was provided and the file file.txt doesn't exist, non-existant text can't be decrypted!")
     
     try:
         shift = int(input("Enter the shift if you know it else leave this blank    "))
@@ -139,9 +144,9 @@ elif MODE == "2" or MODE == "decrypt":
                 TRIGRAMS = SortList(NgramFinder(el, 3))
                 #checks if any of the top three bigrams for enlish text are in the top two bigrams for this plaintext 
                 #then does the same for trigrams
-                if (BIGRAMS[0] == "th" or BIGRAMS[0] == "th" or
-                    BIGRAMS[0] == "he" or BIGRAMS[0] == "he" or
-                    BIGRAMS[0] == "in" or BIGRAMS[0] == "in" or
+                if (BIGRAMS[0] == "th" or BIGRAMS[1] == "th" or
+                    BIGRAMS[0] == "he" or BIGRAMS[1] == "he" or
+                    BIGRAMS[0] == "in" or BIGRAMS[1] == "in" or
                     TRIGRAMS[0] == "the" or TRIGRAMS[1] == "the" or
                     TRIGRAMS[0] == "and" or TRIGRAMS[1] == "and" or
                     TRIGRAMS[0] == "ing" or TRIGRAMS[1] == "ing"):            
