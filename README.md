@@ -1,6 +1,6 @@
 # Caesar-cipher
 Some python for encrypting and decrypting with a caesar cipher  
-[Live demo](repl.it/github/https://github.com/qwertpi/caesar-cipher)  
+[Live demo](https://repl.it/github/https://github.com/qwertpi/caesar-cipher)  
 Feedback and pull requests are very welcome  
 
 
