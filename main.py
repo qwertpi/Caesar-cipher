@@ -97,13 +97,13 @@ def decrypt(string, shift):
 MODE = input("Would you like to 1) Encrypt or 2) Decrypt    ").lower()
 
 if MODE == "1" or MODE == "encrypt":
-    text = input("Enter the text you wish to encrypt    ").lower()
+    text = input("Enter the text you wish to decrypt or place it in a file named input.txt   ").lower()
     if text == "":
         try:
-            with open("file.txt", "r") as f:
+            with open("input.txt", "r") as f:
                 text = f.read().lower()
         except FileNotFoundError:
-            print("No text was provided and the file file.txt doesn't exist, non-existant text can't be encrypted!")
+            print("No text was provided and the file input.txt doesn't exist, non-existant text can't be encrypted!")
     try:
         shift = int(input("Enter the shift you wish to use or leave blank to use a random shift    "))
         
@@ -115,15 +115,15 @@ if MODE == "1" or MODE == "encrypt":
     print(shift)
     
 elif MODE == "2" or MODE == "decrypt":
-    text = input("Enter the text you wish to decrypt    ").lower()
+    text = input("Enter the text you wish to decrypt or place it in a file named input.txt   ").lower()
 
     #opens the file if no text input was provided
     if text == "":
         try:
-            with open("file.txt", "r") as f:
+            with open("input.txt", "r") as f:
                 text = f.read().lower()
         except FileNotFoundError:
-            print("No text was provided and the file file.txt doesn't exist, non-existant text can't be decrypted!")
+            print("No text was provided and the file input.txt doesn't exist, non-existant text can't be decrypted!")
     
     try:
         shift = int(input("Enter the shift if you know it else leave this blank    "))
