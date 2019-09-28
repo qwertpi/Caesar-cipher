@@ -147,16 +147,21 @@ elif MODE == "2" or MODE == "decrypt":
             #without a crib we fall back to bigrams and trigrams
             for el in plaintexts:
                 #gets the bigrams and trigrams in the text in lists of decending order of frequency
+                letter_frequencies = SortList(NgramFinder(el, 1))
                 BIGRAMS = SortList(NgramFinder(el))
                 TRIGRAMS = SortList(NgramFinder(el, 3))
                 #checks if any of the top three bigrams for enlish text are in the top two bigrams for this plaintext 
                 #then does the same for trigrams
+                #and the same for single letters
                 if (BIGRAMS[0] == "th" or BIGRAMS[1] == "th" or
                     BIGRAMS[0] == "he" or BIGRAMS[1] == "he" or
                     BIGRAMS[0] == "in" or BIGRAMS[1] == "in" or
                     TRIGRAMS[0] == "the" or TRIGRAMS[1] == "the" or
                     TRIGRAMS[0] == "and" or TRIGRAMS[1] == "and" or
-                    TRIGRAMS[0] == "ing" or TRIGRAMS[1] == "ing"):            
+                    TRIGRAMS[0] == "ing" or TRIGRAMS[1] == "ing" or
+                    letter_frequencies[0] == "e" or letter_frequencies[1] == "e" or
+                    letter_frequencies[0] == "t" or letter_frequencies[1] == "t" or
+                    letter_frequencies[0] == "a" or letter_frequencies[1] == "a"):          
                        print((ord(text[0]) - 96 - (ord(el[0]) - 96)) % 26)
                        input(el)
                     
