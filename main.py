@@ -45,6 +45,22 @@ def NgramFinder(text, n=2):
 
     return grams
 
+def char_to_num(char):
+    '''
+    Takes a letter and converts it to it's postion in the alphabet
+    :param char: string, the letter to be converted
+    :return: int, the position
+    '''
+    return ord(char) - 96
+    
+def num_to_char(n):
+     '''
+    Takes a letter's position in the alphabet and converts it to the letter
+    :param n: int, the postion to be converted
+    :return: str, the letter
+    '''
+    return chr(n + 96)
+    
 def encrypt(string, shift):
     '''
     Encrypts a string with the caeser cipher
@@ -60,14 +76,14 @@ def encrypt(string, shift):
     for char in string.lower():
         #if the character is alphabetical encrypts it
         if re.match("[a-z]", char):
-            #gets the character as a ascii number 
-            #subtracts 96 to make it a number from 1-26 
+            #gets the character as a ascii number
+            #subtracts 96 to make it a number from 1-26
             #adds the shift
             #does modulo 26 so we wrap back around if we go above 26
             #adds 96 to turn it back into a valid asci character code
-            #converts that number to a charcater 
+            #converts that number to a charcater
             #and appends it to the ciphertext variable
-            ciphertext += chr(((ord(char) - 96 + shift) %26 + 96))
+            ciphertext += num_to_char((char_to_num(char) + shift) % 26)
 
             #26=z but 26%26=0 which results in the ` character this fixes this
             #if the last character (the one we jsut appended) is an `
@@ -141,7 +157,9 @@ elif MODE == "2" or MODE == "decrypt":
             while True:
                 for el in plaintexts:
                     if CRIB in el:
-                        print((ord(text[0]) - 96 - (ord(el[0]) - 96)) % 26)
+                        #calculates and prints the shift
+                        print((char_to_num(text[0]) - 96 - char_to_num(el[0]) - 96)) % 26)
+                        #prints the plaintext with the option for them to press enter when they want to see the next plaintext
                         input(el)
         else:
             #without a crib we fall back to bigrams and trigrams
@@ -150,7 +168,7 @@ elif MODE == "2" or MODE == "decrypt":
                 letter_frequencies = SortList(NgramFinder(el, 1))
                 BIGRAMS = SortList(NgramFinder(el))
                 TRIGRAMS = SortList(NgramFinder(el, 3))
-                #checks if any of the top three bigrams for enlish text are in the top two bigrams for this plaintext 
+                #checks if any of the top three bigrams for enlish text are in the top two bigrams for this plaintext
                 #then does the same for trigrams
                 #and the same for the top 2 single letters
                 if (BIGRAMS[0] == "th" or BIGRAMS[1] == "th" or
@@ -160,9 +178,11 @@ elif MODE == "2" or MODE == "decrypt":
                     TRIGRAMS[0] == "and" or TRIGRAMS[1] == "and" or
                     TRIGRAMS[0] == "ing" or TRIGRAMS[1] == "ing" or
                     letter_frequencies[0] == "e" or letter_frequencies[1] == "e" or
-                    letter_frequencies[0] == "t" or letter_frequencies[1] == "t"):          
-                       print((ord(text[0]) - 96 - (ord(el[0]) - 96)) % 26)
-                       input(el)
+                    letter_frequencies[0] == "t" or letter_frequencies[1] == "t"):
+                        #calculates and prints the shift
+                        print((char_to_num(text[0]) - 96 - char_to_num(el[0]) - 96)) % 26)
+                        #prints the plaintext with the option for them to press enter when they want to see the next plaintext
+                        input(el)
                     
 else:
-    print("That mode doesn't exist, please restart the program") 
+    print("That mode doesn't exist, please restart the program")
