@@ -54,7 +54,7 @@ def char_to_num(char):
     return ord(char) - 96
     
 def num_to_char(n):
-     '''
+    '''
     Takes a letter's position in the alphabet and converts it to the letter
     :param n: int, the postion to be converted
     :return: str, the letter
@@ -158,7 +158,7 @@ elif MODE == "2" or MODE == "decrypt":
                 for el in plaintexts:
                     if CRIB in el:
                         #calculates and prints the shift
-                        print((char_to_num(text[0]) - 96 - char_to_num(el[0]) - 96)) % 26)
+                        print((char_to_num(text[0]) - 96 - char_to_num(el[0]) - 96)% 26)
                         #prints the plaintext with the option for them to press enter when they want to see the next plaintext
                         input(el)
         else:
@@ -180,7 +180,7 @@ elif MODE == "2" or MODE == "decrypt":
                     letter_frequencies[0] == "e" or letter_frequencies[1] == "e" or
                     letter_frequencies[0] == "t" or letter_frequencies[1] == "t"):
                         #calculates and prints the shift
-                        print((char_to_num(text[0]) - 96 - char_to_num(el[0]) - 96)) % 26)
+                        print((char_to_num(text[0]) - 96 - char_to_num(el[0]) - 96)% 26)
                         #prints the plaintext with the option for them to press enter when they want to see the next plaintext
                         input(el)
                     
